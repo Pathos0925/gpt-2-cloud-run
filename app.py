@@ -9,7 +9,7 @@ import gc
 app = Starlette(debug=False)
 
 sess = gpt2.start_tf_sess(threads=1)
-gpt2.load_gpt2(sess)
+gpt2.load_gpt2(sess, multi_gpu=True)
 
 # Needed to avoid cross-domain issues
 response_header = {
@@ -41,8 +41,7 @@ async def homepage(request):
                          truncate=params.get('truncate', None),
                          include_prefix=str(params.get(
                              'include_prefix', True)).lower() == 'true',
-                         return_as_list=True,
-                         multi_gpu=True
+                         return_as_list=True
                          )[0]
 
     generate_count += 1
