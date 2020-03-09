@@ -41,7 +41,8 @@ async def homepage(request):
                          truncate=params.get('truncate', None),
                          include_prefix=str(params.get(
                              'include_prefix', True)).lower() == 'true',
-                         return_as_list=True
+                         return_as_list=True,
+                         multi_gpu=True
                          )[0]
 
     generate_count += 1
@@ -58,4 +59,4 @@ async def homepage(request):
                          headers=response_header)
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    uvicorn.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 8081)))
